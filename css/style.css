@@ -41,4 +41,27 @@ a {
   color: #333;
 }
 
+.branch {
+  float: right;
+  margin-top: 20px;
+}
+.branch li {
+  float: left;
+  margin-right: 30px;
+}
+.branch li a {
+  display: block;
+  width: 200px;
+  height: 40px;
+  background: #555;
+  font: bold 12px/40px "맑은 고딕";
+  color: #fff;
+  text-align: center;
+  border: 1px solid #555;
+}
+.branch li.on a {
+  background: #fff;
+  color: #333;
+}
+
 /*# sourceMappingURL=style.css.map */

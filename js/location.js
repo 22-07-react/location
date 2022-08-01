@@ -15,22 +15,44 @@ setDraggable(true);
 //줌 가능 여부 
 setZoomable(true);
 
-var imageSrc = 'img/marker1.png', // 마커이미지의 주소입니다    
-    imageSize = new kakao.maps.Size(232, 99), // 마커이미지의 크기입니다
-    imageOption = {offset: new kakao.maps.Point(116, 99)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-      
-// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-    markerPosition = new kakao.maps.LatLng(37.51271544089457, 127.05882788633194); // 마커가 표시될 위치입니다
+ 
+let markerOptions = [
+    {
+        title: '본점', 
+        latlng: new kakao.maps.LatLng(37.51271544089457, 127.05882788633194),
+        imgSrc : "img/marker1.png",
+        imgSize : new kakao.maps.Size(232, 99),
+        imgPos : {offset: new kakao.maps.Point(116, 99)}
+    },
+    {
+        title: '지점1', 
+        latlng: new kakao.maps.LatLng(37.5103522798081,127.043930073359),
+        imgSrc : "img/marker2.png",
+        imgSize : new kakao.maps.Size(232, 99),
+        imgPos : {offset: new kakao.maps.Point(116, 99)}
+    },
+    {
+        title: '지점2', 
+        latlng: new kakao.maps.LatLng(37.49708832523959,126.95306963071778),
+        imgSrc : "img/marker3.png",
+        imgSize : new kakao.maps.Size(232, 99),
+        imgPos : {offset: new kakao.maps.Point(116, 99)}
+    } 
+];
 
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition, 
-    image: markerImage // 마커이미지 설정 
-});
+ 
+for(let i=0; i< markerOptions.length; i++){
+    let marker = new kakao.maps.Marker({
+        map:map, 
+        position:markerOptions[i].latlng, 
+        title : markerOptions[i].title, 
+        image : new kakao.maps.MarkerImage(markerOptions[i].imgSrc, markerOptions[i].imgSize, markerOptions[i].imgPos)
+    })
+}
 
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
+ 
+
+
 
 
 

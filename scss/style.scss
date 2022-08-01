@@ -32,3 +32,29 @@
         }
     }
 }
+
+.branch{
+    float:right; 
+    margin-top:20px; 
+
+    li{
+        float:left; 
+        margin-right:30px; 
+
+        a{
+            display:block; 
+            width:200px; 
+            height:40px; 
+            background:#555; 
+            font:bold 12px/40px '맑은 고딕'; 
+            color:#fff; 
+            text-align:center; 
+            border:1px solid #555; 
+        }
+
+        &.on a{
+            background:#fff; 
+            color:#333; 
+        }
+    }
+}
