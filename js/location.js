@@ -1,6 +1,7 @@
 var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
 const t_on = document.querySelectorAll(".traffic li")[0]; //교통정보 켜기버튼 변수로 저장 
 const t_off = document.querySelectorAll(".traffic li")[1]; // 교통정보 끄기 버튼 저장 
+const branch_btns = document.querySelectorAll(".branch li"); 
 
 var mapOption = { 
         center: new kakao.maps.LatLng(37.51271544089457, 127.05882788633194), // 지도의 중심좌표
@@ -22,25 +23,28 @@ let markerOptions = [
         latlng: new kakao.maps.LatLng(37.51271544089457, 127.05882788633194),
         imgSrc : "img/marker1.png",
         imgSize : new kakao.maps.Size(232, 99),
-        imgPos : {offset: new kakao.maps.Point(116, 99)}
+        imgPos : {offset: new kakao.maps.Point(116, 99)}, 
+        button : branch_btns[0]
     },
     {
         title: '지점1', 
         latlng: new kakao.maps.LatLng(37.5103522798081,127.043930073359),
         imgSrc : "img/marker2.png",
         imgSize : new kakao.maps.Size(232, 99),
-        imgPos : {offset: new kakao.maps.Point(116, 99)}
+        imgPos : {offset: new kakao.maps.Point(116, 99)},
+        button : branch_btns[1]
     },
     {
         title: '지점2', 
         latlng: new kakao.maps.LatLng(37.49708832523959,126.95306963071778),
         imgSrc : "img/marker3.png",
         imgSize : new kakao.maps.Size(232, 99),
-        imgPos : {offset: new kakao.maps.Point(116, 99)}
+        imgPos : {offset: new kakao.maps.Point(116, 99)},
+        button : branch_btns[2]
     } 
 ];
 
- 
+//마커 이미지를 해당위치에 위치시킴   
 for(let i=0; i< markerOptions.length; i++){
     let marker = new kakao.maps.Marker({
         map:map, 
@@ -48,10 +52,26 @@ for(let i=0; i< markerOptions.length; i++){
         title : markerOptions[i].title, 
         image : new kakao.maps.MarkerImage(markerOptions[i].imgSrc, markerOptions[i].imgSize, markerOptions[i].imgPos)
     })
+
+    //브랜치 버튼을 클릭했을 때 
+    branch_btns[i].addEventListener("click", e=>{
+        e.preventDefault(); 
+        //버튼 활성화 
+        for(let btn of branch_btns){
+            btn.classList.remove("on"); 
+        }        
+        branch_btns[i].classList.add("on"); 
+
+        //해당 위치로 이동 
+        moveTo(markerOptions[i].latlng)
+    })
 }
 
  
-
+function moveTo(target){
+    let moveLatLon = target; 
+    map.setCenter(moveLatLon); 
+}
 
 
 
