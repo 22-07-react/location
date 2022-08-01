@@ -1,5 +1,8 @@
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
+var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+const t_on = document.querySelectorAll(".traffic li")[0]; //교통정보 켜기버튼 변수로 저장 
+const t_off = document.querySelectorAll(".traffic li")[1]; // 교통정보 끄기 버튼 저장 
+
+var mapOption = { 
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };
@@ -9,6 +12,40 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 //드래그로 지도 이동 가능 
 setDraggable(true); 
+//줌 가능 여부 
+setZoomable(true);
+
+//교통정보 켜기 버튼 클릭했을 때 
+t_on.addEventListener("click", e=>{
+    e.preventDefault(); 
+    let isOn = t_on.classList.contains("on"); 
+    if(isOn) return; 
+    map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);  
+    //버튼 활성화 
+    t_on.classList.add("on"); 
+    t_off.classList.remove("on"); 
+}); 
+
+//교통정보 끄기 버튼 클릭했을 때 
+t_off.addEventListener("click", e=>{
+    e.preventDefault();
+    map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC); 
+
+    //버튼 활성화 
+    t_on.classList.remove("on"); 
+    t_off.classList.add("on"); 
+})
+
+
+
+
+
+
+
+  
+
+
+
 
 
 
@@ -30,4 +67,9 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.LEFT);
 function setDraggable(draggable) {
     // 마우스 드래그로 지도 이동 가능여부를 설정합니다
     map.setDraggable(draggable);    
+}
+
+function setZoomable(zoomable) {
+    // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
+    map.setZoomable(zoomable);    
 }
