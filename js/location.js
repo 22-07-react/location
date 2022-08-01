@@ -68,10 +68,6 @@ for(let i=0; i< markerOptions.length; i++){
 }
 
  
-function moveTo(target){
-    let moveLatLon = target; 
-    map.setCenter(moveLatLon); 
-}
 
 
 
@@ -98,7 +94,18 @@ t_off.addEventListener("click", e=>{
 })
 
 
+window.addEventListener("resize", ()=>{
+    //현재 활성화 되어있는 버튼의 순서값을 구해서 
+    //branch_btns - querySelectorAll 로 구한 유사배열 
 
+    let active = document.querySelector(".branch li.on"); 
+    const branch = Array.from(branch_btns); // 유사배열을 배열로 변환 
+    let active_index = branch.indexOf(active); 
+    console.log(active_index); 
+
+    //인수값에 활성화순번 넣기 
+    map.setCenter(markerOptions[active_index].latlng); 
+})
 
 
 
@@ -133,4 +140,9 @@ function setDraggable(draggable) {
 function setZoomable(zoomable) {
     // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
     map.setZoomable(zoomable);    
+}
+
+function moveTo(target){
+    let moveLatLon = target; 
+    map.setCenter(moveLatLon); 
 }
